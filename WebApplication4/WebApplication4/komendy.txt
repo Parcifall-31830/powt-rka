@@ -1,0 +1,26 @@
+﻿NuGet:
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Design
+
+ConnectionString:
+"ConnectionStrings": {
+    "Default": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=apbd;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"
+  }
+
+Do dodania w Program.cs:
+builder.Services.AddScoped<IDbService, DbService>();
+builder.Services.AddDbContext<AppDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+});
+
+instalowanie dotnet'a :
+dotnet tool install --global dotnet-ef
+
+tworzenie migracji:
+dotnet ef migrations add "zawartość"
+
+updatowanie bazy:
+dotnet database update
